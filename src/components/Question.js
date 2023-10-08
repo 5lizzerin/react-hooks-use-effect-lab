@@ -1,9 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 function Question({ question, onAnswered }) {
   const [timeRemaining, setTimeRemaining] = useState(10);
 
-  // add useEffect code
+  useEffect(() => {
+    if (timeRemaining === 0) {
+      setTimeRemaining(10);
+      onAnswered(false);
+      return;
+    }
+
+    const timerId = setTimeout(() => {
+      setTimeRemaining((timeRemaining) => timeRemaining - 1);
+    }, 1000);
+  })
+    
 
   function handleAnswer(isCorrect) {
     setTimeRemaining(10);
@@ -30,3 +41,12 @@ function Question({ question, onAnswered }) {
 }
 
 export default Question;
+
+
+
+// When the Question component renders, create a side effect using useEffect and use setTimeout to run a callback function after 1 second.
+
+  //add useEffect to react import
+  //
+
+// Inside the callback function for setTimeout, use the setTimeRemaining function to decrease the amount of time remaining by 1 every 1 second.
